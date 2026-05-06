@@ -4,6 +4,17 @@
 
 CraveSwitch AI is a culturally-aware intelligent food swapping assistant built to help users navigate their cravings. It provides practical, non-judgmental, and healthy alternatives to favorite dishes based on the specific psychological and situational context of the craving.
 
+## 🔴 Live Demo
+🚀 **[Deployed on Google Cloud Run](#)** *(Replace with actual URL after deployment)*
+
+## 📸 Screenshots
+
+*(Placeholder for App Dashboard Screenshot)*
+
+*(Placeholder for Recommendation Output Screenshot)*
+
+*(Placeholder for Google Maps Integration Screenshot)*
+
 ## 🚀 Project Overview
 
 CraveSwitch AI takes a user's desired dish and their current craving context (like "Stress eating" or "Late-night craving") and generates a personalized breakdown. Instead of just saying "eat a salad," it offers:
@@ -12,11 +23,11 @@ CraveSwitch AI takes a user's desired dish and their current craving context (li
 - Cooking modifications
 - Smarter restaurant ordering strategies
 
-## Architecture
+## 🏗 Architecture
 
 User Input → Streamlit UI → Gemini API → Contextual Food Analysis → Healthier Recommendations
 
-## Features
+## ✨ Features
 
 - Context-aware craving analysis
 - AI-powered healthier food swaps
@@ -25,20 +36,32 @@ User Input → Streamlit UI → Gemini API → Contextual Food Analysis → Heal
 - Restaurant ordering intelligence
 - Cloud-native deployment
 
-## Testing
+## 🌐 Google Ecosystem Integration
 
-Basic validation tests were implemented using pytest to verify:
-- API configuration
-- Input handling
+This application relies on a robust Google ecosystem stack to deliver value:
+- **Gemini API (`gemini-1.5-flash`)**: Used for contextual food reasoning and personalized health swapping.
+- **Google Cloud Run**: Serverless compute platform hosting the Streamlit application.
+- **Google Cloud Build**: Automated CI/CD pipelines to build the container images.
+- **Artifact Registry**: Secure storage for the Docker container images.
+- **Google Maps Workflow Integration**: Dynamically generates local search queries to find healthier restaurant alternatives.
+- **Google Search Integration**: Quickly links out to healthy recipe variations for user cooking.
+
+## ♿ Accessibility Features
+
+CraveSwitch AI is built with accessibility and usability in mind:
+- **Readable Layouts**: A wide, spacious layout ensures text isn't cramped.
+- **Explicit Labels**: Clear helper text and captions guide users effectively.
+- **Downloadable Outputs**: Users can easily download their recommendations as `.txt` files.
+- **Structured Recommendation Sections**: The UI features semantic headings, clear dividers, and a dedicated `text_area` view specifically optimized for screen readers to easily consume the AI output.
+
+## 🧪 Testing
+
+Code quality and reliability are ensured using **pytest**-based validation. The test suite covers:
+- API configuration and secrets availability
+- Input string validation
 - Context option integrity
-
-## Google Cloud Services Used
-
-- Google Cloud Run for serverless deployment
-- Gemini API for contextual food reasoning
-- Google Cloud Build for automated container builds
-- Artifact Registry for container storage
-- Vertex AI ecosystem compatibility through Gemini models
+- Prompt variable injection logic
+- Score range constraints
 
 ## ☁️ Google Cloud Deployment Instructions
 
@@ -65,7 +88,7 @@ This application is containerized and ready to be deployed to Google Cloud Run.
      --set-env-vars="GEMINI_API_KEY=your_actual_api_key_here"
    ```
 
-## Future Improvements
+## 🔮 Future Improvements
 
 - Nutritional database integration
 - Real-time calorie estimation

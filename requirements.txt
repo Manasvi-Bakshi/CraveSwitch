@@ -2,3 +2,5 @@ streamlit
 google-genai
 python-dotenv
 pytest
+firebase-admin
+google-cloud-firestore
