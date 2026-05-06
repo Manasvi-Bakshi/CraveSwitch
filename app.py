@@ -1,4 +1,5 @@
 import os
+import logging
 import streamlit as st
 from dotenv import load_dotenv
 from google import genai
@@ -16,6 +17,16 @@ if not api_key:
 # Configure Gemini client
 client = genai.Client(api_key=api_key)
 
+logging.basicConfig(level=logging.INFO)
+
+@st.cache_data(show_spinner=False)
+def generate_food_switch(prompt):
+    response = client.models.generate_content(
+        model="models/gemini-flash-latest",
+        contents=prompt
+    )
+    return response.text
+
 # Debug (commented out for now)
 # try:
 #     models = client.models.list()
@@ -32,11 +43,12 @@ client = genai.Client(api_key=api_key)
 st.set_page_config(
     page_title="CraveSwitch AI",
     page_icon="🍽️",
-    layout="centered"
+    layout="wide"
 )
 
 # Header Section
 st.title("🍽 CraveSwitch AI")
+st.caption("CraveSwitch AI helps users discover healthier alternatives to foods they crave while preserving taste and satisfaction.")
 st.subheader("Keep the craving. Switch the damage.")
 
 st.markdown("""
@@ -56,6 +68,7 @@ with st.container():
             "What dish are you craving?",
             placeholder="e.g., Chole Bhature, Ice Cream, Biryani"
         )
+        st.caption("Example: Biryani, Ice Cream, Pizza, Chole Bhature")
 
         context_options = [
             "Late-night craving",
@@ -80,6 +93,8 @@ if submit_button:
     if not dish:
         st.warning("Please enter a dish.")
         st.stop()
+        
+    st.divider()
 
     prompt = f"""
 You are CraveSwitch AI, a culturally-aware intelligent food swapping assistant.
@@ -122,10 +137,8 @@ Use this exact format:
 
         try:
 
-            response = client.models.generate_content(
-                model="models/gemini-flash-latest",
-                contents=prompt
-            )
+            response_text = generate_food_switch(prompt)
+            logging.info(f"Generated food switch for: {dish} | Context: {context}")
 
             st.success("Analysis Complete!")
 
@@ -138,7 +151,7 @@ Use this exact format:
                 st.metric("Flavor Retention", "88%")
 
             st.markdown("---")
-            st.markdown(response.text)
+            st.markdown(response_text)
             st.markdown("---")
 
             st.caption(
@@ -146,4 +159,5 @@ Use this exact format:
             )
 
         except Exception as e:
-            st.error(f"Gemini API Error: {e}")
+            logging.error(str(e))
+            st.error("The AI service is temporarily busy. Please try again in a few seconds.")
